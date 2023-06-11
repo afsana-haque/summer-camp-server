@@ -32,6 +32,7 @@ async function run() {
 
     const classesCollection = client.db("musicSchhol").collection("classes");
     const instructorsCollection = client.db("musicSchhol").collection("instructors");
+    const cartCollection = client.db("musicSchhol").collection("classesCart");
 
     //Classes data
     app.get('/classes', async(req, res) => {
@@ -44,6 +45,8 @@ async function run() {
       const result = await instructorsCollection.find().sort({students: -1}).toArray();
       res.send(result);
     })
+
+    //cart Collection 
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
