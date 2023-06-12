@@ -32,7 +32,7 @@ async function run() {
 
     const classesCollection = client.db("musicSchhol").collection("classes");
     const instructorsCollection = client.db("musicSchhol").collection("instructors");
-    const cartCollection = client.db("musicSchhol").collection("classesCart");
+    const cartCollection = client.db("musicSchhol").collection("carts");
 
     //Classes data
     app.get('/classes', async(req, res) => {
@@ -47,6 +47,12 @@ async function run() {
     })
 
     //cart Collection 
+    app.post('/carts', async (req, res) => {
+      const classes = req.body;
+      console.log(classes);
+      const result = await cartCollection.insertOne(classes);
+      res.send(result);
+    })
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
