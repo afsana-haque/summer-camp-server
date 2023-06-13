@@ -30,9 +30,17 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     //await client.connect();
 
+    const usersCollection = client.db("musicSchhol").collection("users");
     const classesCollection = client.db("musicSchhol").collection("classes");
     const instructorsCollection = client.db("musicSchhol").collection("instructors");
     const cartCollection = client.db("musicSchhol").collection("carts");
+  
+    //User apis
+    app.post('/users', async(req, res) => {
+      const user = req.body;
+      const result = await usersCollection.insertOne(user);
+      res.send(result);
+    })
 
     //Classes data
     app.get('/classes', async(req, res) => {
