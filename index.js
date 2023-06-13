@@ -38,6 +38,12 @@ async function run() {
     app.get('/classes', async(req, res) => {
       const result = await classesCollection.find().sort({students: -1}).toArray();
       res.send(result);
+    });
+
+    app.post('/classes', async(req, res) => {
+      const newItem = req.body;
+      const result = await classesCollection.insertOne(newItem);
+      res.send(result);
     })
 
     //Instructors data
